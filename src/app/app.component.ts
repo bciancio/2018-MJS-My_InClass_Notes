@@ -51,18 +51,62 @@ export class AppComponent {
             sum: 0,
             sub: 0,
             mul: 0,
-            div: 0            
+            div: 0,
+            performSum: function() {      
+              let total:number = 0;    
+              this.inputs.forEach(element => {
+                total += Number(element.value);
+              });
+              this.sum = total;              
+            },
+            performSub: function() {
+              let first:number;
+              let total:number;    
+              this.inputs.forEach(element => {
+                if(!first) {
+                  first = Number(element.value);
+                  total = Number(element.value);
+                } else {
+                  total = total - Number(element.value);
+                }
+              });
+              this.sub = total;              
+            },
+            performMul: function() {      
+              let first:number;
+              let total:number;      
+              this.inputs.forEach(element => {
+                if(!first) {
+                  first = Number(element.value);
+                  total = Number(element.value);
+                } else {
+                  total = total * Number(element.value);
+                }
+              });
+              this.mul = total;              
+            },
+            performDiv: function() {      
+              let first:number;
+              let total:number;      
+              this.inputs.forEach(element => {
+                if(!first) {
+                  first = Number(element.value);
+                  total = Number(element.value);
+                } else {
+                  total = total / Number(element.value);
+                }
+              });     
+              this.div = total;          
+            }            
   }
   // sum: ()=>{}
 
   public performAllCalculations() {
     // Perform sum calc
-    console.log(this.calc.inputs[0].value);
-    this.calc.sum = Number(this.calc.inputs[0].value) + Number(this.calc.inputs[1].value);
-    this.calc.sub = Number(this.calc.inputs[0].value) - Number(this.calc.inputs[1].value);
-    this.calc.mul = Number(this.calc.inputs[0].value) * Number(this.calc.inputs[1].value);
-    this.calc.div = Number(this.calc.inputs[0].value) / Number(this.calc.inputs[1].value);
-    console.log(this.calc);
+    this.calc.performSum();
+    this.calc.performSub();
+    this.calc.performMul();
+    this.calc.performDiv();
   }
 
   input1 = 0;
@@ -112,6 +156,6 @@ export class AppComponent {
 } 
 
 interface InputNumber {
-  label: String;
-  value: Number;
+  label: string;
+  value: number;
 }
